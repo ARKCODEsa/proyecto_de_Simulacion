@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorpane_home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.arkcode.proyecto_de_simulacion.HomeController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/ube_edificio.png" />
+         </image>
+      </ImageView>
+      <Line endX="-146.0" endY="344.0" layoutX="174.0" layoutY="42.0" startX="-146.0" startY="-27.0" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="-146.0" endY="327.0" layoutX="181.0" layoutY="53.0" startX="-146.0" startY="-38.0" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="-146.0" endY="321.0" layoutX="189.0" layoutY="52.0" startX="-146.0" startY="-35.0" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="-164.0" endY="333.0" layoutX="192.0" layoutY="53.0" startX="580.0" startY="333.0" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="-146.0" endY="333.0" layoutX="181.0" layoutY="47.0" startX="591.0" startY="333.0" stroke="WHITE" strokeWidth="2.0" />
+      <Line endX="-164.0" endY="333.0" layoutX="209.0" layoutY="40.0" startX="562.0" startY="333.0" stroke="WHITE" strokeWidth="2.0" />
+      <Button fx:id="btn_iniciar" layoutX="672.0" layoutY="259.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: white;" text="INICIAR" textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="667.0" layoutY="89.0" text="2024" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="672.0" layoutY="149.0" text="22 / DICIEMBRE " textFill="WHITE" />
+      <Label layoutX="324.0" layoutY="341.0" text="MATERIA: MODELADO Y SIMULACION DE SISTEMAS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="283.0" prefHeight="52.0" prefWidth="567.0" text="SIMULADOR DE SISTEMAS DE INVENTARIOS " textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="265.0" text="DOCENTE: LORENZO JOVANNY CEVALLOS TORRESTEORIA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="219.0" text="ALUMNO" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="237.0" text="ORTIZ CAICEDO JORGE JEFFERSON">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="NW_RESIZE" />
+   </cursor>
+</AnchorPane>
