@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Product Id="*" Name="SimuladorDeInventarios" Language="1033" Version="1.0.0.0" Manufacturer="ArkCode" UpgradeCode="B0B15C00-1DC4-0374-A1D1-E902240936D5">
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes" />
+
+    <!-- Configuración del directorio de instalación -->
+<Directory Id="TARGETDIR" Name="SourceDir">
+    <Directory Id="ProgramFilesFolder">
+    <Directory Id="INSTALLFOLDER" Name="SimuladorDeInventarios" />
+    </Directory>
+    </Directory>
+
+    <!-- Referencia al archivo ejecutable -->
+    <DirectoryRef Id="INSTALLFOLDER">
+    <Component Id="MainExecutable" Guid="PUT-GUID-HERE">
+    <File Id="MainExecutable" Source="C:\2024\java\proyecto_de_simulacion\SimuladorDeInventarios\SimuladorDeInventarios.exe" KeyPath="yes" />
+    </Component>
+    </DirectoryRef>
+
+    <!-- Definición de características -->
+    <Feature Id="ProductFeature" Title="SimuladorDeInventarios" Level="1">
+    <ComponentRef Id="MainExecutable" />
+    </Feature>
+    </Product>
+    </Wix>
