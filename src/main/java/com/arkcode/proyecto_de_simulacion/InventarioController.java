@@ -3,30 +3,47 @@ package com.arkcode.proyecto_de_simulacion;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.application.Platform;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
+
 import javafx.scene.shape.Cylinder;
-import javafx.scene.shape.MeshView;
-import javafx.scene.shape.TriangleMesh;
+
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+
 import java.util.Random;
 
 public class InventarioController {
+    @FXML
+    public Button startSimulationButton;
+    @FXML
+    public Button clearSimulationButton;
+    @FXML
+    private TableView<Producto> productosTable;
+    @FXML
+    private TableColumn<Producto, String> nombreColumn;
+    @FXML
+    private TableColumn<Producto, Integer> cantidadDispColumn;
+    @FXML
+    private TableColumn<Producto, Integer> demandaColumn;
+    @FXML
+    private TableColumn<Producto, Integer> tiempoReordenColumn;
+
+    @FXML
+    private TextField nombreProductoField;
+    @FXML
+    private TextField cantidadProductoField;
+    @FXML
+    private TextField demandaProductoField;
+    @FXML
+    private TextField tiempoReordenProductoField;
 
     @FXML
     private TextField averageDemandField;
@@ -70,9 +87,22 @@ public class InventarioController {
     private double EOQ;
 
     private boolean isSimulationRunning = false;
+    private Inventario inventario = new Inventario();
 
     @FXML
     private void initialize() {
+
+
+        inventario = new Inventario();
+
+        // Configurar las columnas de la tabla
+        nombreColumn.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        cantidadDispColumn.setCellValueFactory(new PropertyValueFactory<>("cantidadDisponible"));
+        demandaColumn.setCellValueFactory(new PropertyValueFactory<>("demandaDiaria"));
+        tiempoReordenColumn.setCellValueFactory(new PropertyValueFactory<>("tiempoReorden"));
+
+        productosTable.setItems(FXCollections.observableArrayList(inventario.getProductos()));
+
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         demandColumn.setCellValueFactory(new PropertyValueFactory<>("demand"));
         inventoryColumn.setCellValueFactory(new PropertyValueFactory<>("inventory"));
@@ -157,13 +187,7 @@ public class InventarioController {
         return true;
     }
 
-    private void showAlert(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 
     private double calculateEOQ(double demand, double reorderTime) {
         double orderingCost = 100;
@@ -189,7 +213,7 @@ public class InventarioController {
 
             if (currentInventory <= Double.parseDouble(reorderPointField.getText())) {
                 double reorderFactor = 1 + Math.random();
-                currentInventory += EOQ * reorderFactor;
+                currentInventory += (int) (EOQ * reorderFactor);
                 reorder = true;
                 totalReorders++;
             }
@@ -236,5 +260,50 @@ public class InventarioController {
         Cylinder cylinder = new Cylinder(50, currentInventory);  // Modificar la altura del cilindro
         stackPane.getChildren().clear();  // Limpiar la vista 3D actual
         stackPane.getChildren().add(cylinder);  // Agregar el cilindro actualizado
+    }
+
+    @FXML
+    public void agregarProductoAction() {
+        try {
+            String nombre = nombreProductoField.getText();
+            int cantidad = Integer.parseInt(cantidadProductoField.getText());
+            int demanda = Integer.parseInt(demandaProductoField.getText());
+            int tiempoReorden = Integer.parseInt(tiempoReordenProductoField.getText());
+
+            Producto producto = new Producto(nombre, cantidad, demanda, tiempoReorden);
+            inventario.agregarProducto(producto);
+
+            productosTable.getItems().setAll(inventario.getProductos());
+
+            limpiarCampos();
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Entrada inválida", "Por favor, ingrese datos válidos.");
+        }
+    }
+
+    private void limpiarCampos() {
+        nombreProductoField.clear();
+        cantidadProductoField.clear();
+        demandaProductoField.clear();
+        tiempoReordenProductoField.clear();
+    }
+
+    private void showAlert(AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void actualizarDatosSimulacion() {
+        double demandaPromedio = inventario.calcularDemandaPromedio();
+        int inventarioInicial = inventario.calcularNivelInventarioInicial();
+        int puntoReorden = inventario.calcularPuntoReorden();
+
+        averageDemandField.setText(String.format("%.2f", demandaPromedio));
+        initialInventoryField.setText(String.valueOf(inventarioInicial));
+        reorderPointField.setText(String.valueOf(puntoReorden));
     }
 }

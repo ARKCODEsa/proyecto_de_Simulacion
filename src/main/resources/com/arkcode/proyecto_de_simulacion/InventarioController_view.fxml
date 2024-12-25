@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.arkcode.proyecto_de_simulacion.InventarioController">
+<BorderPane style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.arkcode.proyecto_de_simulacion.InventarioController">
+
     <!-- Barra superior: Encabezado -->
     <top>
         <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10; -fx-background-color: #ff0000;">
@@ -20,72 +22,99 @@
         </HBox>
     </top>
 
-    <!-- Área izquierda: Controles de entrada -->
-    <left>
-        <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #f5f5f5;">
-            <Text style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-fill: #000000;" text="Configuración de Simulación" />
-
-            <Label style="-fx-text-fill: #000000;" text="Demanda Promedio" />
-            <TextField fx:id="averageDemandField" promptText="Ej. 10" />
-
-            <Label style="-fx-text-fill: #000000;" text="Tiempo de Reorden (Días)" />
-            <TextField fx:id="reorderTimeField" promptText="Ej. 5" />
-
-            <Label style="-fx-text-fill: #000000;" text="Punto de Reorden (Unidades)" />
-            <TextField fx:id="reorderPointField" promptText="Ej. 50" />
-
-            <Label style="-fx-text-fill: #000000;" text="Nivel de Inventario Inicial (Unidades)" />
-            <TextField fx:id="initialInventoryField" promptText="Ej. 100" />
-
-            <Label style="-fx-text-fill: #000000;" text="Tiempo de Simulación (Días)" />
-            <TextField fx:id="simulationTimeField" promptText="Ej. 100" />
-
-            <Button fx:id="startSimulationButton" onAction="#startSimulation" prefHeight="57.0" prefWidth="265.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="Iniciar Simulación" />
-            <Button fx:id="clearSimulationButton" onAction="#clearSimulation" prefHeight="57.0" prefWidth="265.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="LIMPIAR" />
-        </VBox>
-    </left>
-
-    <!-- Área central: Gráfico de inventario -->
+    <!-- Área central con ScrollPane para desplazamiento horizontal -->
     <center>
-        <VBox spacing="10" style="-fx-padding: 20;">
-            <Text style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-fill: #000000;" text="Gráfico de Inventario" />
-            <LineChart fx:id="inventoryChart" prefHeight="715.0" prefWidth="500.0" style="-fx-background-color: #ffffff;" title="Nivel de Inventario vs. Tiempo">
-                <xAxis>
-                    <NumberAxis label="Tiempo" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis label="Nivel de Inventario" />
-                </yAxis>
-            </LineChart>
-        </VBox>
+        <ScrollPane style="-fx-padding: 10;">
+            <VBox spacing="20" style="-fx-padding: 20;">
+                <HBox spacing="15">
+
+                    <!-- Inventario Actual y Formularios -->
+                    <VBox prefHeight="658.0" prefWidth="455.0" spacing="15" style="-fx-padding: 20;">
+                        <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inventario Actual" />
+
+                        <!-- Tabla de productos -->
+                        <TableView fx:id="productosTable" prefHeight="300">
+                            <columns>
+                                <TableColumn fx:id="nombreColumn" prefWidth="81.0" text="Producto" />
+                                <TableColumn fx:id="cantidadDispColumn" prefWidth="96.0" text="Cantidad" />
+                                <TableColumn fx:id="demandaColumn" prefWidth="114.0" text="Demanda Diaria" />
+                                <TableColumn fx:id="tiempoReordenColumn" prefWidth="112.0" text="Tiempo Reorden" />
+                            </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                        </TableView>
+
+                        <!-- Formulario para agregar nuevos productos -->
+                        <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Agregar Producto" />
+                        <TextField fx:id="nombreProductoField" promptText="Nombre" />
+                        <TextField fx:id="cantidadProductoField" promptText="Cantidad Disponible" />
+                        <TextField fx:id="demandaProductoField" promptText="Demanda Diaria" />
+                        <TextField fx:id="tiempoReordenProductoField" promptText="Tiempo de Reorden" />
+
+                        <!-- Botones de acción -->
+                        <Button onAction="#agregarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Agregar Producto" />
+
+                        <Button onAction="#actualizarDatosSimulacion" prefHeight="25.0" prefWidth="412.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Calcular Datos Simulación" />
+                    </VBox>
+                    <!-- Controles de entrada -->
+                    <VBox prefHeight="625.0" prefWidth="286.0" spacing="15" style="-fx-padding: 20; -fx-background-color: #f5f5f5; -fx-border-color: #cccccc; -fx-border-width: 1;">
+                        <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Configuración de Simulación" />
+
+                        <Label text="Demanda Promedio" />
+                        <TextField fx:id="averageDemandField" promptText="Ej. 10" />
+
+                        <Label text="Tiempo de Reorden (Días)" />
+                        <TextField fx:id="reorderTimeField" promptText="Ej. 5" />
+
+                        <Label text="Punto de Reorden (Unidades)" />
+                        <TextField fx:id="reorderPointField" promptText="Ej. 50" />
+
+                        <Label text="Nivel de Inventario Inicial (Unidades)" />
+                        <TextField fx:id="initialInventoryField" promptText="Ej. 100" />
+
+                        <Label text="Tiempo de Simulación (Días)" />
+                        <TextField fx:id="simulationTimeField" promptText="Ej. 100" />
+
+                        <Button fx:id="startSimulationButton" onAction="#startSimulation" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="Iniciar Simulación" />
+
+                        <Button fx:id="clearSimulationButton" onAction="#clearSimulation" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="LIMPIAR" />
+                    </VBox>
+
+                       <!-- Gráfico de Inventario -->
+                    <VBox prefHeight="658.0" prefWidth="716.0" spacing="10" style="-fx-padding: 20;">
+                        <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gráfico de Inventario" />
+
+                           <LineChart fx:id="inventoryChart" prefHeight="597.0" prefWidth="676.0" style="-fx-background-color: #ffffff;" title="Nivel de Inventario">
+                            <xAxis>
+                                <NumberAxis label="Tiempo" prefWidth="598.0" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis label="Nivel de Inventario" />
+                            </yAxis>
+                        </LineChart>
+                    </VBox>
+                    <!-- Resultados -->
+                    <VBox prefHeight="658.0" prefWidth="553.0" spacing="15" style="-fx-padding: 20;">
+                        <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Resultados" />
+   
+                           <Text fx:id="finalInventoryText" text="Nivel de Inventario Final: " />
+                        <Text fx:id="orderFrequencyText" text="Frecuencia de Reorden: " />
+   
+                           <TableView fx:id="inventoryTable" prefHeight="514.0" prefWidth="322.0" style="-fx-background-color: #ffffff;">
+                            <columns>
+                                <TableColumn fx:id="timeColumn" text="Tiempo" />
+                                <TableColumn fx:id="demandColumn" text="Demanda" />
+                                <TableColumn fx:id="inventoryColumn" text="Inventario Restante" />
+                                <TableColumn fx:id="reorderColumn" text="Reorden Realizado" />
+                            </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                        </TableView>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </ScrollPane>
     </center>
-
-    <!-- Área derecha: Resultados -->
-    <right>
-        <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #f5f5f5;">
-            <Text style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-fill: #000000;" text="Resultados" />
-
-            <Text fx:id="finalInventoryText" style="-fx-text-fill: #000000;" text="Nivel de Inventario Final: " />
-            <Text fx:id="orderFrequencyText" style="-fx-text-fill: #000000;" text="Frecuencia de Reorden: " />
-
-            <TableView fx:id="inventoryTable" prefHeight="644.0" prefWidth="322.0" style="-fx-background-color: #ffffff;">
-                <columns>
-                    <TableColumn fx:id="timeColumn" text="Tiempo" />
-                    <TableColumn fx:id="demandColumn" text="Demanda" />
-                    <TableColumn fx:id="inventoryColumn" text="Inventario Restante" />
-                    <TableColumn fx:id="reorderColumn" text="Reorden Realizado" />
-                </columns>
-                <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                </columnResizePolicy>
-            </TableView>
-        </VBox>
-    </right>
-
-    <!-- Área inferior: Pie de página -->
-    <bottom>
-        <HBox alignment="CENTER" style="-fx-padding: 10; -fx-background-color: #ff0000;">
-            <Label style="-fx-text-fill: #ffffff; -fx-font-size: 12px;" text="© 2024 ArkCode. Todos los derechos reservados." />
-        </HBox>
-    </bottom>
 </BorderPane>
