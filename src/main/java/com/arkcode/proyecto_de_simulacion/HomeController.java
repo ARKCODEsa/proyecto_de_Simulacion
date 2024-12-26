@@ -13,8 +13,8 @@ public class HomeController {
     public void initialize() {
 
         // cambiar el color del boton cuando el mouse esta encima a azul claro y cuando sale a rojo
-        btn_iniciar.setOnMouseEntered(e -> btn_iniciar.setStyle("-fx-background-color: rgba(0,58,255,0.51);"));
-        btn_iniciar.setOnMouseExited(e -> btn_iniciar.setStyle("-fx-background-color: #ffffff;"));
+        btn_iniciar.setOnMouseEntered(e -> btn_iniciar.setStyle("-fx-background-color: rgb(200,179,179);"));
+        btn_iniciar.setOnMouseExited(e -> btn_iniciar.setStyle("-fx-background-color: red;"));
 
 
         // Evento para el botón Iniciar

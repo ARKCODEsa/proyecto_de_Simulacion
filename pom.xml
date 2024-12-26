@@ -66,7 +66,7 @@
                             <goal>jlink</goal>
                         </goals>
                         <configuration>
-                            <mainClass>com.arkcode.proyecto_de_simulacion.App</mainClass> <!-- Clase principal -->
+                            <mainClass>com.arkcode.proyecto_de_simulacion.launcher</mainClass> <!-- Clase principal -->
                             <launcher>simulador</launcher> <!-- Nombre del archivo ejecutable generado -->
                             <jlinkZipName>SimuladorRuntime</jlinkZipName> <!-- Nombre del ZIP con el runtime -->
                             <jlinkImageName>SimuladorRuntime</jlinkImageName> <!-- Carpeta del runtime -->
@@ -95,7 +95,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.arkcode.proyecto_de_simulacion.App</mainClass>
+                                    <mainClass>com.arkcode.proyecto_de_simulacion.launcher</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

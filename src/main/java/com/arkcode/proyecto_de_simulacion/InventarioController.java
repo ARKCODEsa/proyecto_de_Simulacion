@@ -92,7 +92,42 @@ public class InventarioController {
     private Inventario inventario = new Inventario();
 
     @FXML
+    private Button editarButton;
+
+    @FXML
+    private Button eliminarButton;
+
+    @FXML
+    private Button calcularButton;
+
+    @FXML
+    private Button agregarButton;
+
+
+
+    @FXML
     private void initialize() {
+
+        // cambiar el color del boton cuando el mouse esta encima
+
+        startSimulationButton.setOnMouseEntered(e -> startSimulationButton.setStyle("-fx-background-color: rgb(123,255,0);"));
+        startSimulationButton.setOnMouseExited(e -> startSimulationButton.setStyle("-fx-background-color: blue;"));
+
+        clearSimulationButton.setOnMouseEntered(e -> clearSimulationButton.setStyle("-fx-background-color: rgb(123,255,0);"));
+        clearSimulationButton.setOnMouseExited(e -> clearSimulationButton.setStyle("-fx-background-color: red;"));
+
+        editarButton.setOnMouseEntered(e -> editarButton.setStyle("-fx-background-color: rgb(123,255,0);"));
+        editarButton.setOnMouseExited(e -> editarButton.setStyle("-fx-background-color: red;"));
+
+        eliminarButton.setOnMouseEntered(e -> eliminarButton.setStyle("-fx-background-color: rgb(123,255,0);"));
+        eliminarButton.setOnMouseExited(e -> eliminarButton.setStyle("-fx-background-color: red;"));
+
+        calcularButton.setOnMouseEntered(e -> calcularButton.setStyle("-fx-background-color: rgb(123,255,0);"));
+        calcularButton.setOnMouseExited(e -> calcularButton.setStyle("-fx-background-color: blue;"));
+
+        agregarButton.setOnMouseEntered(e -> agregarButton.setStyle("-fx-background-color: rgb(123,255,0);"));
+        agregarButton.setOnMouseExited(e -> agregarButton.setStyle("-fx-background-color: red;"));
+
 
 
         inventario = new Inventario();

@@ -26,15 +26,15 @@
     <!-- Área central con ScrollPane para desplazamiento horizontal -->
     <center>
         <ScrollPane style="-fx-padding: 10;">
-            <VBox spacing="20" style="-fx-padding: 20;">
-                <HBox spacing="15">
+            <VBox prefHeight="698.0" prefWidth="1819.0" spacing="20" style="-fx-padding: 20;">
+                <HBox prefHeight="658.0" prefWidth="1814.0" spacing="15">
 
                     <!-- Inventario Actual y Formularios -->
-                    <VBox prefHeight="658.0" prefWidth="339.0" spacing="15" style="-fx-padding: 20;">
+                    <VBox prefHeight="658.0" prefWidth="383.0" spacing="15" style="-fx-padding: 20;">
                         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inventario Actual" />
 
                         <!-- Tabla de productos -->
-                        <TableView fx:id="productosTable" prefHeight="300">
+                        <TableView fx:id="productosTable" prefHeight="300" style="-fx-background-color: white;">
                             <columns>
                                 <TableColumn fx:id="nombreColumn" prefWidth="81.0" text="Producto" />
                                 <TableColumn fx:id="cantidadDispColumn" prefWidth="96.0" text="Cantidad" />
@@ -53,22 +53,22 @@
                         <TextField fx:id="demandaProductoField" promptText="Demanda Diaria" />
                         <TextField fx:id="tiempoReordenProductoField" promptText="Tiempo de Reorden" />
 
-                        <Button onAction="#actualizarDatosSimulacion" prefHeight="25.0" prefWidth="412.0" style="-fx-background-color: blue; -fx-text-fill: #ffffff;" text="Calcular Datos Simulación" textFill="WHITE">
+                        <Button fx:id="calcularButton" onAction="#actualizarDatosSimulacion" prefHeight="25.0" prefWidth="412.0" style="-fx-background-color: blue; -fx-text-fill: #ffffff;" text="Calcular Datos Simulación" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
 
                         <!-- Botones de acción -->
-                        <Button onAction="#agregarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Agregar Producto">
+                        <Button fx:id="agregarButton" onAction="#agregarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Agregar Producto" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <Button onAction="#editarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Editar Producto">
+                  <Button fx:id="editarButton" onAction="#editarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Editar Producto" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button onAction="#eliminarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Eliminar Producto">
+                  <Button fx:id="eliminarButton" onAction="#eliminarProductoAction" prefHeight="25.0" prefWidth="419.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff;" text="Eliminar Producto" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -93,16 +93,16 @@
                         <Label text="Tiempo de Simulación (Días)" />
                         <TextField fx:id="simulationTimeField" promptText="Ej. 100" />
 
-                        <Button fx:id="startSimulationButton" onAction="#startSimulation" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: blue; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="Iniciar Simulación" />
+                        <Button fx:id="startSimulationButton" onAction="#startSimulation" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: blue; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="Iniciar Simulación" textFill="WHITE" />
 
-                        <Button fx:id="clearSimulationButton" onAction="#clearSimulation" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="LIMPIAR" />
+                        <Button fx:id="clearSimulationButton" onAction="#clearSimulation" prefHeight="25.0" prefWidth="243.0" style="-fx-background-color: #ff0000; -fx-text-fill: #ffffff; -fx-font-weight: bold;" text="LIMPIAR" textFill="WHITE" />
                     </VBox>
 
-                       <!-- Gráfico de Inventario -->
-                    <VBox prefHeight="658.0" prefWidth="673.0" spacing="10" style="-fx-padding: 20;">
+                             <!-- Gráfico de Inventario -->
+                    <VBox prefHeight="658.0" prefWidth="812.0" spacing="10" style="-fx-padding: 20;">
                         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gráfico de Inventario" />
 
-                           <LineChart fx:id="inventoryChart" prefHeight="597.0" prefWidth="676.0" style="-fx-background-color: #ffffff;" title="Nivel de Inventario">
+                                 <LineChart fx:id="inventoryChart" prefHeight="584.0" prefWidth="643.0" style="-fx-background-color: #ffffff;" title="Nivel de Inventario">
                             <xAxis>
                                 <NumberAxis label="Tiempo" prefWidth="598.0" />
                             </xAxis>
@@ -112,13 +112,13 @@
                         </LineChart>
                     </VBox>
                     <!-- Resultados -->
-                    <VBox prefHeight="658.0" prefWidth="418.0" spacing="15" style="-fx-padding: 20;">
+                    <VBox prefHeight="658.0" prefWidth="518.0" spacing="15" style="-fx-padding: 20;">
                         <Text style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Resultados" />
    
                            <Text fx:id="finalInventoryText" text="Nivel de Inventario Final: " />
                         <Text fx:id="orderFrequencyText" text="Frecuencia de Reorden: " />
    
-                           <TableView fx:id="inventoryTable" prefHeight="514.0" prefWidth="322.0" style="-fx-background-color: #ffffff;">
+                           <TableView fx:id="inventoryTable" prefHeight="514.0" prefWidth="322.0" style="-fx-background-color: white;">
                             <columns>
                                 <TableColumn fx:id="timeColumn" text="Tiempo" />
                                 <TableColumn fx:id="demandColumn" text="Demanda" />
