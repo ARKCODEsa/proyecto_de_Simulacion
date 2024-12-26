@@ -22,6 +22,16 @@ public class Inventario {
         productos.removeIf(producto -> producto.getNombre().equals(nombre));
     }
 
+    //editar producto
+    public void editarProducto(String nombre, Producto producto) {
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getNombre().equals(nombre)) {
+                productos.set(i, producto);
+                break;
+            }
+        }
+    }
+
     public Producto buscarProducto(String nombre) {
         return productos.stream().filter(p -> p.getNombre().equals(nombre)).findFirst().orElse(null);
     }
