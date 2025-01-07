@@ -1,11 +1,13 @@
 package com.arkcode.proyecto_de_simulacion;
-
+// Clase Producto para almacenar los productos
 public class Producto {
+    // Atributos de la clase Producto para almacenar los productos
     private String nombre;
     private int cantidadDisponible;
     private int demandaDiaria;
     private int tiempoReorden;
 
+    // Constructor de la clase Producto con parámetros para inicializar los atributos
     public Producto(String nombre, int cantidadDisponible, int demandaDiaria, int tiempoReorden) {
         this.nombre = nombre;
         this.cantidadDisponible = cantidadDisponible;
@@ -13,7 +15,7 @@ public class Producto {
         this.tiempoReorden = tiempoReorden;
     }
 
-    // Getters y Setters
+    // Getters y Setters de la clase Producto para acceder a los atributos y modificarlos si es necesario
     public String getNombre() {
         return nombre;
     }

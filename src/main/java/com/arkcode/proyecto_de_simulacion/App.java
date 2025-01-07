@@ -1,14 +1,16 @@
 package com.arkcode.proyecto_de_simulacion;
-
+// importar las clases necesarias
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+// Clase principal de la aplicación
 public class App extends Application {
+    // Método para cargar una vista FXML
     public static void loadFXML(String s) {
+        // Cargar la vista FXML
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource
                     (s));
@@ -37,6 +39,7 @@ public class App extends Application {
                     stage2.setResizable(false);
                     stage2.centerOnScreen();
                     stage2.show();
+                    // catch para manejar errores
                 } catch (IOException e) {
                     // cuadro de dialogo de error
                     javafx.scene.control.Alert alert2 = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
@@ -46,7 +49,7 @@ public class App extends Application {
                     alert2.showAndWait();
                 }
             });
-
+            // catch para manejar errores
         } catch (IOException e) {
             // cuadro de dialogo de error
             javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
@@ -56,7 +59,7 @@ public class App extends Application {
             alert.showAndWait();
         }
     }
-
+    // Método para iniciar la aplicación
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -71,7 +74,7 @@ public class App extends Application {
         stage.centerOnScreen();
         stage.show();
     }
-
+    // Método principal de la aplicación para iniciar la aplicación
     public static void main(String[] args) {
         launch(args);  // Llamar a launch() para iniciar la aplicación
     }

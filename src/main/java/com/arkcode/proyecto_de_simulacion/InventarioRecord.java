@@ -1,12 +1,13 @@
 package com.arkcode.proyecto_de_simulacion;
-
+// Clase InventarioRecord para almacenar los registros de inventario
 public class InventarioRecord {
+    // Atributos de la clase InventarioRecord
     private int time;
     private int demand;
     private int inventory;
     private boolean reorder;
 
-    // Constructor
+    // Constructor de la clase InventarioRecord con parámetros
     public InventarioRecord(int time, int demand, int inventory, boolean reorder) {
         this.time = time;
         this.demand = demand;
@@ -14,7 +15,7 @@ public class InventarioRecord {
         this.reorder = reorder;
     }
 
-    // Getters y Setters
+    // Getters y Setters de la clase InventarioRecord para acceder a los atributos y modificarlos si es necesario
     public int getTime() {
         return time;
     }

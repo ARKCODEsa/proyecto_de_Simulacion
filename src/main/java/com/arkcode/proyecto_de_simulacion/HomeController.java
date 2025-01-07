@@ -1,15 +1,15 @@
 package com.arkcode.proyecto_de_simulacion;
-
+// importar las clases necesarias
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-
+// Clase HomeController
 public class HomeController {
 
-
+    // Atributos de la clase HomeController
     @FXML
     private Button btn_iniciar;
-
+    // Método para inicializar la vista
     public void initialize() {
 
         // cambiar el color del boton cuando el mouse esta encima a azul claro y cuando sale a rojo
